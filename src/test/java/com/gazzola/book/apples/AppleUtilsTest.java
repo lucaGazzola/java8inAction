@@ -13,11 +13,29 @@ public class AppleUtilsTest
     Apple golden = new Apple(400, "gold");
     Apple red = new Apple(200, "red");
 
-    List<Apple> inventory = new ArrayList<Apple>();
+    List<Apple> inventory = new ArrayList<>();
     inventory.add(golden);
     inventory.add(red);
 
-    AppleUtils.prettyPrintApple(inventory, new PrettyApplePrinter());
+    // Class
+    AppleUtils.prettyPrintApple(inventory, new ColorApplePrinter());
+
+    // Anonymous class
+    AppleUtils.prettyPrintApple(inventory, new ApplePrinter()
+    {
+      @Override
+      public String print(Apple apple)
+      {
+        return apple.getColor();
+      }
+    });
+
+    // Lambda expression
+    AppleUtils.prettyPrintApple(inventory, (apple) -> apple.getColor());
+
+    // Method reference
+    AppleUtils.prettyPrintApple(inventory, Apple::getColor);
+
 
   }
 }
